@@ -12,6 +12,7 @@
         //raw: the raw input from user,
         $raw_username = $_POST['username'];
         $raw_password = $_POST['password'];
+
     }
     else
     {
