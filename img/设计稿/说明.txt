@@ -1,3 +1,21 @@
 设计稿两侧红线假设的浏览器的宽度，请以红线为准设定位置，红线外的内容是为了适应不同的浏览器而预留的。
 
-主页按钮样式请参考http://www.bootcss.com/p/buttons/#buttons-glow
+【主页】
+主页的logo请使用“主页logo”
+主页按钮样式来自http://www.bootcss.com/p/buttons/#buttons-glow
+“密码修改成功提示”等标签样式来自http://www.runoob.com/bootstrap/bootstrap-labels.html
+“找回密码”等蓝色值：#30a8d4
+“用户名”等灰色值：#64686d
+“选填”灰色值：#b8babc
+
+【聊天界面】
+聊天界面的logo请使用“其他logo”
+“礼貌聊天，文明交往”标签样式来自http://www.runoob.com/bootstrap/bootstrap-labels.html
+下拉菜单样式来自http://v3.bootcss.com/components/#dropdowns
+消息提示徽章“42”样式来自http://www.runoob.com/bootstrap/bootstrap-badges.html
+输入框按钮样式来自http://www.runoob.com/bootstrap/bootstrap-buttons.html
+“+加好友”按钮样式来自http://www.bootcss.com/p/buttons/#buttons-glow
+对方用户名灰色值：#64686d
+对方个性签名灰色值：#b8babc
+
+“机器人认为你们相隔”和“不知道聊什么”为远期规划，最后再做
