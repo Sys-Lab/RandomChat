@@ -19,3 +19,11 @@
 对方个性签名灰色值：#b8babc
 
 “机器人认为你们相隔”和“不知道聊什么”为远期规划，最后再做
+
+【个人主页】
+聊天界面的logo请使用“其他logo”
+“礼貌聊天，文明交往”标签样式来自http://www.runoob.com/bootstrap/bootstrap-labels.html
+下拉菜单样式来自http://v3.bootcss.com/components/#dropdowns
+消息提示徽章“42”、“41”和“1”样式来自http://www.runoob.com/bootstrap/bootstrap-badges.html
+所有按钮样式均来自http://www.bootcss.com/p/buttons/
+根据“浏览权限”来设定遮挡，在遮挡效果下，用户名由经过函数产生的指定用户名遮挡，指定用户名格式为“匿名用户+四位数字”
