@@ -5,17 +5,10 @@
 *  has: login(with input,js with ajax to login.php),register(no input,location:register.php),
 *
 */
-    //require_once('../include/header.php');
 
+require_once ('../include/session_start.php');
 
-
-
-
-
-
-
-
-
+//  check login --> give user message, and login should not repeat
 ?>
 
 
