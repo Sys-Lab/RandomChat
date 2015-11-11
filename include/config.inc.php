@@ -14,4 +14,6 @@
     define('USER', 'randomchat');
     define('PASSWORD', 'RandomChat');
     define('TABLE_USER', 'user');
+
+    date_default_timezone_set("PRC");
 ?>

@@ -19,10 +19,9 @@ if (@isset($_POST['username']) && isset($_POST['password']) && isset($_POST['sex
     // connect to DB
     $db = new DB();
     $response = $db->addUser($raw_username, $raw_password, $raw_sex, $raw_email, date('Y-m-d H:i:s', time()));
-//    print_r($response);
-//    print ($response['status']);
+
     if ($response['status'] === true)
-    {// success
+    {//success
         //login(this user)
         $_SESSION['username'] = $response['message']['username'];
         header("Location: home.php?user=" . $response['message']['username']);

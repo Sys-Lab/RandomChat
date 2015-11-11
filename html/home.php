@@ -18,5 +18,20 @@ if (@isset($_GET['user']))
 if (@isset($_SESSION['username']) && $_SESSION['username'] !== null)
 {
     $loginUser = $_SESSION['username'];
-    echo 'Login at ' . $loginUser;
+    echo 'Login at ' . $loginUser . '<br \>';
+
+    echo '<a href=logout.php>logout</a>' . '<br \>';
+
+    echo '<a href=chat.php>RandomChat Start</a> <br \>';
+
+
+
 }
+else
+{
+    echo 'Your have not login.';
+}
+
+
+
+echo '<br \>' . 'This is the end of home page.';

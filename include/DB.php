@@ -31,13 +31,13 @@ class DB
         }
     }
 
-    public function filter($raw_input)
+    private function filter($raw_input)
     {
         $input = $raw_input;
         return $input;
     }
 
-    public function execSQL($sql)
+    private function execSQL($sql)
     {
         try
         {
