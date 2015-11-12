@@ -190,7 +190,8 @@ class DB
         $username = $this->filter($raw_username);
         $password = $this->filter($raw_password);
 
-        $sql = sprintf("select sex,email from `%s` where username='%s' and password=aes_encrypt('%s', '%s')", TABLE_USER, $username, $password, $password, $password);
+        $sql = sprintf("select sex,email from `%s` where username='%s' and password=aes_encrypt('%s', '%s');", TABLE_USER, $username, $password, $password, $password);
+
         try
         {
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -198,13 +199,22 @@ class DB
             $rs->setFetchMode(PDO::FETCH_ASSOC);
 
             $req = $rs->fetchAll();
-//            print_r($req);
-//            exit();
+
+            if (count($req) === 0)    //NOTICE: select is empty
+            {
+                $errorArray = array
+                (
+                    "status" => false,
+                    "message" => array
+                    (
+                        "errorCode" => 42000,  // some thing to change with front
+                        "errorMessage" => "username and password not match.",
+                    )
+                );
+                return $errorArray;
+            }
             $sex = $req[0]['sex'];
             $email = $req[0]['email'];
-//            exit(0);
-//            if ($req === 1)
-//            {
             $successArray = array
             (
                 "status" => true,   //login success
@@ -217,7 +227,6 @@ class DB
             );
 
             return $successArray;
-//            }
         }
         catch (Exception $e)
         {

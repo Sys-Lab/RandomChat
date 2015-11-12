@@ -29,6 +29,10 @@ if (@isset($_POST['username']) && isset($_POST['password']))
         $_SESSION['username'] = $response['message']['username'];
         header('Location: home.php');
     }
+    else
+    {
+        echo json_encode($response);
+    }
 
 
 }
