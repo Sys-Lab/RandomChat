@@ -17,6 +17,8 @@ class Chat
 
     function __construct()
     {
+
+
         try
         {
             $this->dbh = new PDO('mysql:host=' . HOST . ';dbname=' . DATABASE, USER, PASSWORD, array(
@@ -42,7 +44,10 @@ class Chat
             $this->dbh->beginTransaction();
             $this->dbh->exec($sql);
             $this->dbh->commit();
-            return true;
+            return $response = array
+                                (
+                                    "status" => true,
+                                );
         }
         catch (Exception $e)
         {
@@ -61,19 +66,7 @@ class Chat
             $errorCode = $e->getCode();
             switch($errorCode)
             {
-//                case 23000:
-//                {
-//                    $errorArray = array
-//                    (
-//                        "status" => false,
-//                        "message" => array
-//                        (
-//                            "errorCode" => $errorCode,  // some thing to change with front
-//                            "errorMessage" => "username was exists.",
-//                        )
-//                    );
-//                    return $errorArray;
-//                }
+
                 default:
                     $errorArray = array
                     (
@@ -166,32 +159,26 @@ class Chat
     }
 
 
-    public function addMessage($from, $to, $message, $time)
+    public function addMessage($from, $to, $message, $postTime)
     {
         //the message must htmlspecialchars
 
         $message = htmlspecialchars($message, ENT_QUOTES);
 
-        $sql = sprintf("insert into `%s` (from, to, message, time) values ('%s', '%s', '%s', '%s');", TABLE_MESSAGE, $from, $to, $message, $time);
+        $sql = sprintf("insert into `%s` (`from`, `to`, `message`, `time`) values ('%s', '%s', '%s', '%s');", TABLE_MESSAGE, $from, $to, $message, $postTime);
+//        print $sql;exit(0);
         $response = $this->execSQL($sql);
-        if ($response === true)
-        {
-            //OK tell fron to refresh
-        }
-        else
-        {
-            return $response;
-        }
+        return $response;
     }
 
     public function getMessage($from, $to)
     {
         //WARNING : get time by '>' is slow, should use UNIX TIME
-        $sql = sprintf("select message,time from `%s` where from='%s' and to='%s' and time>'%s';", TABLE_MESSAGE, $from, $to, $time);
+        $sql = sprintf("select id,message,time from `%s` where from='%s' and to='%s' and time>'%s';", TABLE_MESSAGE, $from, $to, $time);
         $response = $this->querySQL($sql);
-        print_r($response);
-        //TODO: select by time,return a dict
-
+//        print_r($response);
+        //TODO: select by time,return json
+        return $response;
     }
 
     function __destruct()

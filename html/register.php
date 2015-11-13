@@ -24,7 +24,7 @@ if (@isset($_POST['username']) && isset($_POST['password']) && isset($_POST['sex
     {//success
         //login(this user)
         $_SESSION['username'] = $response['message']['username'];
-        header("Location: home.php?user=" . $response['message']['username']);
+        header("Location: home.php");
         exit(0);
     }
     else
