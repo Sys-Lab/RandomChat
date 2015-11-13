@@ -1,300 +1,152 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lc4t
- * Date: 10/23/15
- * Time: 8:43 PM
- */
+/*
+*  this is index.php
+*  has: login(with input,js with ajax to login.php),register(no input,location:register.php),
+*
+*/
+require_once ('../include/session_start.php');
+require_once ('../include/User.php');
+//  check login --> give user message, and login should not repeat
+?>
 
-require_once ('config.inc.php');
 
-class DB
-{
 
-    function __construct()
-    {
-        try
-        {
-            $this->dbh = new PDO('mysql:host=' . HOST . ';dbname=' . DATABASE, USER, PASSWORD, array(
-                PDO::ATTR_PERSISTENT => true));
-        }
-        catch (Exception $e)
-        {
-            if (DEBUG)
-            {
-                die("Unable to connect: " . $e->getMessage());
-            }
-            else
-            {
-                die();
-            }
-        }
-    }
-
-    private function filter($raw_input)
-    {
-        $input = $raw_input;
-        return $input;
-    }
-
-    private function execSQL($sql)
-    {
-        try
-        {
-            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->dbh->beginTransaction();
-            $this->dbh->exec($sql);
-            $this->dbh->commit();
-            return true;
-        }
-        catch (Exception $e)
-        {
-            $this->dbh->rollBack();
-
-            if (DEBUG)
-            {
-                echo "Failed: " . $e->getMessage() . '<br \>';
-                echo $e->getCode() . '<br \>';
-            }
-            else
-            {
-                //
-            }
-
-            $errorCode = $e->getCode();
-            switch($errorCode)
-            {
-                case 23000:
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+        <meta name="viewport" content="width=device-width,innitial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <!-- 新 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+        <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- <style type="text/css">
+           body{background-image: url("home_bg.jpg");background-repeat:no-repeat;border-image: 100%}
+                           .table th, .table td {text-align: center;}
+         </style>-->
+        <style type="text/css">
+            .vertical-button{position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);}
+            .a font{position: absolute;top: 40%;left: 50%;transform: translate(-50%, -50%);}
+            .b font{position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}
+            .modal.fade.in {top: 25%;}
+        </style>
+        <title>welcome to our randomchat</title>
+    </head>
+    <body >
+    <div id="bg" style="position:absolute; width:100%; height:100%; z-index:-1">
+        <img src="src/index_bg.jpg" height="100%" width="100%"/>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="a">
+                <p>
+                    <font class="text-center align=center" color="#FFFFFFF" size=1000%>Chat with stranger</font>
+                </p>
+            </div>
+            <div class="b">
+                <p>
+                    <font class="text-center align=center" color="#FFFFFFF" size=1000%>Chat with surprise</font>
+                </p>
+            </div>
+            <div class="vertical-button">
+                <?php
+                $user = new User();
+                if ($user->isLogin())
                 {
-                    $errorArray = array
-                    (
-                        "status" => false,
-                        "message" => array
-                        (
-                            "errorCode" => $errorCode,  // some thing to change with front
-                            "errorMessage" => "username was exists.",
-                        )
-                    );
-//                    $errorResponse = json_encode($errorArray);
-//                    return $errorResponse;
-                    return $errorArray;
+                    ?>
+                    <p>
+                        <button class="btn btn-info btn-lg" type="button" onclick="location='home.php'">home</button>
+                    </p>
+                    <?php
                 }
-                default:
-                    $errorArray = array
-                    (
-                        "status" => false,
-                        "message" => array
-                        (
-                            "errorCode" => -1,
-                            "errorMessage" => "Something wrong.",
-                        ),
-                    );
-//                    $errorResponse = json_encode($errorArray);
-//                    return $errorResponse;
-                    return $errorArray;
-
-            }
-
-
-
-        }
-    }
-
-    public function addUser($raw_username, $raw_password, $raw_sex, $raw_email, $postTime)
-    {
-        $username = $this->filter($raw_username);
-        $password = $this->filter($raw_password);
-        $sex      = $this->filter($raw_sex);
-        $email    = $this->filter($raw_email);
-        $sql = sprintf("insert into `%s` (username, password, sex, email, regist_time, last_login_time) values ('%s', aes_encrypt('%s', '%s'), '%s', '%s', '%s', '%s');", TABLE_USER, $username, $password, $password, $sex, $email, $postTime, $postTime);
-
-        try
-        {
-            // add a user,
-            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->dbh->beginTransaction();
-            $this->dbh->exec($sql);
-            $this->dbh->commit();
-            $successArray = array
-            (
-                "status" => true,
-                "message" => array
-                (
-                    "username" => $username,  // some thing to change with front
-                    "sex" => $sex,
-                    "email" => $email,
-                ),
-            );
-//            $successResponse = json_encode($successArray);
-//            return $successResponse;
-            return $successArray;
-
-        }
-        catch (Exception $e)
-        {
-            // if something wrong, there is deal with it
-            $this->dbh->rollBack();
-
-            if (DEBUG)
-            {
-                echo "Failed: " . $e->getMessage() . '<br \>';
-                echo $e->getCode() . '<br \>';
-            }
-            else
-            {
-                //
-            }
-
-            $errorCode = $e->getCode();
-            switch($errorCode)
-            {
-                case 23000:
+                else
                 {
-                    $errorArray = array
-                    (
-                        "status" => false,
-                        "message" => array
-                        (
-                            "errorCode" => $errorCode,  // some thing to change with front
-                            "errorMessage" => "username was exists.",
-                        ),
-                    );
-//                    $errorResponse = json_encode($errorArray);
-//                    return $errorResponse;
-                    return $errorArray;
+                    ?>
+                    <p>
+                        <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#myRegister">register</button>
+                        <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target=".bs-example-modal-sm"> signin </button>
+                    </p>
+                    <?php
                 }
-                default:
-                    $errorArray = array
-                    (
-                        "status" => false,
-                        "message" => array
-                        (
-                            "errorCode" => -1,
-                            "errorMessage" => "Something wrong.",
-                        ),
-
-                    );
-//                    $errorResponse = json_encode($errorArray);
-//                    return $errorResponse;
-                    return $errorArray;
-
-            }
-
-
-
-        }
-    }
-
-    public function loginUser($raw_username, $raw_password, $postTime)
-    {
-        $username = $this->filter($raw_username);
-        $password = $this->filter($raw_password);
-
-        $sql = sprintf("select sex,email from `%s` where username='%s' and password=aes_encrypt('%s', '%s');", TABLE_USER, $username, $password, $password, $password);
-
-        try
-        {
-            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $rs = $this->dbh->query($sql);
-            $rs->setFetchMode(PDO::FETCH_ASSOC);
-
-            $req = $rs->fetchAll();
-
-            if (count($req) === 0)    //NOTICE: select is empty
-            {
-                $errorArray = array
-                (
-                    "status" => false,
-                    "message" => array
-                    (
-                        "errorCode" => 42000,  // some thing to change with front
-                        "errorMessage" => "username and password not match.",
-                    )
-                );
-                return $errorArray;
-            }
-            $sex = $req[0]['sex'];
-            $email = $req[0]['email'];
-            $successArray = array
-            (
-                "status" => true,   //login success
-                "message" => array
-                (
-                    "username" => $username,  // some thing to change with front
-                    "sex" => $sex,
-                    "email" => $email,
-                ),
-            );
-            // update last login
-            $sql = sprintf("update '%s' set last_login_time='%s' where username='%s';",TABLE_USER, $postTime, $username);
-            $this->execSQL($sql);
-            return $successArray;
-        }
-        catch (Exception $e)
-        {
-
-            if (DEBUG)
-            {
-                echo "Failed: " . $e->getMessage() . '<br \>';
-                echo $e->getCode() . '<br \>';
-            }
-            else
-            {
-                //
-            }
-
-            $errorCode = $e->getCode();
-            switch($errorCode)
-            {
-                case 42000: //Query was empty, means match error
-                {
-                    $errorArray = array
-                    (
-                        "status" => false,
-                        "message" => array
-                        (
-                            "errorCode" => $errorCode,  // some thing to change with front
-                            "errorMessage" => "username and password not match.",
-                        )
-                    );
-
-                    return $errorArray;
-                }
-                default:
-                    $errorArray = array
-                    (
-                        "status" => false,
-                        "message" => array
-                        (
-                            "errorCode" => -1,
-                            "errorMessage" => "Something wrong.",
-                        ),
-                    );
-
-                    return $errorArray;
-
-            }
-
-
-
-        }
-
-
-    }
+                ?>
+            </div>
+        </div>
+    </div>
+    <div id="mySignin" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h1 class="text-center text-primary">登录</h1>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="login.php" class="form col-md-12 center-block">
+                        <div class="form-group">
+                            <label for="Username">  Username</label>
+                            <input type="username" class="form-control input-lg" name="username" placeholder="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="Username">  Password</label>
+                            <input type="password" class="form-control input-lg" name="password" placeholder="password" maxlength=16>
+                        </div>
+                        <div class="form-group" align="center">
+                            <button type="submit" class="btn btn-default btn-lg">Submit</button>
+                        </div>
+                    </form>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myRegister" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h1 class="text-center text-primary">注册</h1>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="register.php" class="form col-md-12 center-block">
+                        <div class="form-group">
+                            <label for="Username">  Username</label>
+                            <input type="username" class="form-control input-lg" placeholder="username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="Password">  Password</label>
+                            <input type="password" class="form-control input-lg" placeholder="password" name="password" maxlength=16>
+                        </div>
+                        <div class="form-group">
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" value="male"> gentleman
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" value="female"> lady
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email">  Email</label>
+                            <input type="email" class="form-control input-lg" placeholder="email" name="email">
+                        </div>
+                </div>
+                <div class="form-group" align="center">
+                    <button type="submit" class="btn btn-default btn-lg">Submit</button>
+                </div>
+                </form>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </body>
+    </html>
 
 
 
 
-
-
-    function __destruct()
-    {
-        $this->dbh = null;
-    }
-
-}
-
-
-
-
+<?php
+//require_once('../include/footer.php');
 ?>
