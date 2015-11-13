@@ -21,11 +21,61 @@
       .b font{position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}
       .modal.fade.in {top: 25%;}
     </style>
+    <script type="text/javascript">
+      function RegCheck(RegForm)
+      {
+        if (RegForm.username.value == "")
+        {
+          alert("用户名不可为空");
+          RegForm.username.focus();
+          return (false);
+        }
+        if (RegForm.username.value.length > 15 || RegForm.username.value.length < 3)
+        {
+          alert("用户名长度不符");
+          RegForm.username.focus();
+          return (false);
+        }
+        if (RegForm.password.value == "")
+        {
+          alert("密码不可为空");
+          RegForm.password.focus();
+          return (false);
+        }
+        if (RegForm.password.value.length > 16 || RegForm.password.value.length < 6)
+        {
+          alert("密码长度不符");
+          RegForm.password.focus();
+          return (false);
+        }
+        if (RegForm.email.value == "")
+        {
+          alert("电子邮箱不可为空");
+          RegForm.email.focus();
+          return (false);
+        }
+      }
+      function SignCheck(SignForm)
+      {
+        if (SignForm.username.value == "")
+        {
+          alert("用户名不可为空");
+          SignForm.username.focus();
+          return (false);
+        }
+        if (SignForm.password.value == "")
+        {
+          alert("密码不可为空");
+          SignForm.password.focus();
+          return (false);
+        }
+      }
+    </script>
     <title>welcome to our randomchat</title>
   </head>
   <body >
      <div id="bg" style="position:absolute; width:100%; height:100%; z-index:-1">
-       <img src="index_bg.jpg" height="100%" width="100%"/>
+       <img src="src/index_bg.jpg" height="100%" width="100%"/>
      </div>
     <div class="container">
       <div class="row">
@@ -55,7 +105,7 @@
                     <h1 class="text-center text-primary">登录</h1>
                   </div>
                   <div class="modal-body">
-                    <form method="post" action="login.php" class="form col-md-12 center-block">
+                    <form method="post" action="login.php" class="form col-md-12 center-block" onSubmit="return SignCheck(this)">
                       <div class="form-group">
                        <label for="Username">  Username</label>
                         <input type="username" class="form-control input-lg" name="username" placeholder="username">
@@ -81,18 +131,20 @@
                     <h1 class="text-center text-primary">注册</h1>
                   </div>
                   <div class="modal-body">
-                    <form method="post" action="register.php" class="form col-md-12 center-block">
+                    <form method="post" action="register.php" class="form col-md-12 center-block" onSubmit="return RegCheck(this)">
                       <div class="form-group">
                         <label for="Username">  Username</label>
                         <input type="username" class="form-control input-lg" placeholder="username" name="username">
+                        <span>(必填，3~15字符长度，支持字母、数字及下划线)</span>
                       </div>
                       <div class="form-group">
                         <label for="Password">  Password</label>
                         <input type="password" class="form-control input-lg" placeholder="password" name="password" maxlength=16>
+                        <span>(必填,6~16位,支持字母、数字及下划线,区分大小写)</span>
                       </div>
                       <div class="form-group">
                           <label class="radio-inline">
-                            <input type="radio" name="sex" value="male"> gentleman
+                            <input type="radio" name="sex" value="male" checked> gentleman
                           </label>
                           <label class="radio-inline">
                             <input type="radio" name="sex" value="female"> lady
@@ -101,6 +153,7 @@
                       <div class="form-group">
                         <label for="Email">  Email</label>
                         <input type="email" class="form-control input-lg" placeholder="email" name="email">
+                        <span>(必填,建议使用gmail)</span>
                       </div>
                  </div>
                       <div class="form-group" align="center">
