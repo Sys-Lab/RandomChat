@@ -159,14 +159,84 @@ class Chat
     }
 
 
+    private function userExists($to)
+    {
+        try
+        {
+            $sql = sprintf("select 1 from `%s` where username='%s';", TABLE_USER, $to);
+
+            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $rs = $this->dbh->query($sql);
+            $rs->setFetchMode(PDO::FETCH_ASSOC);
+
+            $req = $rs->fetchAll();
+
+            if (count($req) !== 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+        }
+        catch (Exception $e)
+        {
+
+            if (DEBUG)
+            {
+                echo "Failed: " . $e->getMessage() . '<br \>';
+                echo $e->getCode() . '<br \>';
+            }
+            else
+            {
+                //
+            }
+
+            $errorCode = $e->getCode();
+            switch($errorCode)
+            {
+
+                default:
+                    $errorArray = array
+                    (
+                        "status" => false,
+                        "message" => array
+                        (
+                            "errorCode" => -1,
+                            "errorMessage" => "Something wrong.",
+                        ),
+                    );
+
+                    return $errorArray;
+
+            }
+        }
+
+
+    }
+
+
     public function addMessage($from, $to, $message, $postTime)
     {
         //the message must htmlspecialchars
 
         $message = htmlspecialchars($message, ENT_QUOTES);
-
+        if (@$this->userExists($to) !== true)
+        {
+            return array
+                    (
+                        "status" => false,
+                        "message" => array
+                        (
+                            "errorCode" => -24,  // some thing to change with front
+                            "errorMessage" => "No this user.",
+                        ),
+                    );
+        }
         $sql = sprintf("insert into `%s` (`from`, `to`, `message`, `time`) values ('%s', '%s', '%s', '%s');", TABLE_MESSAGE, $from, $to, $message, $postTime);
-//        print $sql;exit(0);
         $response = $this->execSQL($sql);
         return $response;
     }

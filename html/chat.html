@@ -28,9 +28,9 @@
               {// code for IE6, IE5
               xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
               }
-            xmlhttp.open("POST","send.php",true);
+            xmlhttp.open("POST","chat.php?action=send",true);
             xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            xmlhttp.send(document.getElementById("myChat").value);
+            xmlhttp.send("to=test&message=" + document.getElementById("myChat").value);
             }
         </script>
     </head>

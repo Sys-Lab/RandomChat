@@ -22,7 +22,7 @@ if (@isset($_SESSION['username']) && $_SESSION['username'] !== null)
 
     echo '<a href=logout.php>logout</a>' . '<br \>';
 
-    echo '<a href=chat.php>RandomChat Start</a> <br \>';
+    echo '<a href=chat.html>RandomChat Start</a> <br \>';
 
 
 
