@@ -159,7 +159,7 @@ class Chat
     }
 
 
-    private function userExists($to)
+    public function userExists($to)
     {
         try
         {
@@ -173,11 +173,11 @@ class Chat
 
             if (count($req) !== 0)
             {
-                return true;
+                return 1;
             }
             else
             {
-                return false;
+                return 0;
             }
 
 
@@ -224,7 +224,7 @@ class Chat
         //the message must htmlspecialchars
 
         $message = htmlspecialchars($message, ENT_QUOTES);
-        if (@$this->userExists($to) !== true)
+        if (@$this->userExists($to) === 0)
         {
             return array
                     (
