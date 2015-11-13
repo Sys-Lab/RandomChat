@@ -122,20 +122,20 @@ class Chat
             $errorCode = $e->getCode();
             switch($errorCode)
             {
-                case 42000: //Query was empty, means match error
-                {
-                    $errorArray = array
-                    (
-                        "status" => false,
-                        "message" => array
-                        (
-                            "errorCode" => $errorCode,  // some thing to change with front
-                            "errorMessage" => "username and password not match.",
-                        )
-                    );
-
-                    return $errorArray;
-                }
+//                case 42000: //Query was empty, means match error
+//                {
+//                    $errorArray = array
+//                    (
+//                        "status" => false,
+//                        "message" => array
+//                        (
+//                            "errorCode" => $errorCode,  // some thing to change with front
+//                            "errorMessage" => "username and password not match.",
+//                        )
+//                    );
+//
+//                    return $errorArray;
+//                }
                 default:
                     $errorArray = array
                     (
@@ -241,10 +241,12 @@ class Chat
         return $response;
     }
 
-    public function getMessage($from, $to)
+    public function getMessage($from, $to, $startTime)
     {
         //WARNING : get time by '>' is slow, should use UNIX TIME
-        $sql = sprintf("select id,message,time from `%s` where from='%s' and to='%s' and time>'%s';", TABLE_MESSAGE, $from, $to, $time);
+        $sql = sprintf("select id,message,time from %s where `from`='%s' and `to`='%s' and time>'%s';", TABLE_MESSAGE, $from, $to, $startTime);
+//        echo $sql;exit(0);
+
         $response = $this->querySQL($sql);
 //        print_r($response);
         //TODO: select by time,return json

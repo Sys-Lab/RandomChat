@@ -64,7 +64,8 @@ if (@isset($_GET['action']))
         if (@isset($_POST['to']))
         {
             $to = $_POST['to'];
-            echo json_encode($chat->getMessage($user->getUsername(), $to));
+            $startTime = date('Y-m-d H:i:s', strtotime('-20 minute'));
+            echo json_encode($chat->getMessage($user->getUsername(), $to, $startTime));
             exit(0);
         }
         else

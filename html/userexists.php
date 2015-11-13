@@ -56,8 +56,8 @@ if (@isset($_POST['user']))
                 "status" => false,
                 "message" => array
                 (
-                    "errorCode" => -204,  // some thing to change with front
-                    "errorMessage" => "username input error.",
+                    "Code" => -204,  // some thing to change with front
+                    "Message" => "username input error.",
                 ),
             )
         );
@@ -72,8 +72,8 @@ else
             "status" => false,
             "message" => array
             (
-                "errorCode" => -206,  // some thing to change with front
-                "errorMessage" => "No input.",
+                "Code" => -206,  // some thing to change with front
+                "Message" => "No input.",
             ),
         )
     );
