@@ -16,7 +16,7 @@ class DB
         try
         {
             $this->dbh = new PDO('mysql:host=' . HOST . ';dbname=' . DATABASE, USER, PASSWORD, array(
-            PDO::ATTR_PERSISTENT => true));
+                PDO::ATTR_PERSISTENT => true));
         }
         catch (Exception $e)
         {
@@ -71,8 +71,8 @@ class DB
                         "status" => false,
                         "message" => array
                         (
-                        "errorCode" => $errorCode,  // some thing to change with front
-                        "errorMessage" => "username was exists.",
+                            "errorCode" => $errorCode,  // some thing to change with front
+                            "errorMessage" => "username was exists.",
                         )
                     );
 //                    $errorResponse = json_encode($errorArray);
@@ -85,8 +85,8 @@ class DB
                         "status" => false,
                         "message" => array
                         (
-                        "errorCode" => -1,
-                        "errorMessage" => "Something wrong.",
+                            "errorCode" => -1,
+                            "errorMessage" => "Something wrong.",
                         ),
                     );
 //                    $errorResponse = json_encode($errorArray);
@@ -120,9 +120,9 @@ class DB
                 "status" => true,
                 "message" => array
                 (
-                "username" => $username,  // some thing to change with front
-                "sex" => $sex,
-                "email" => $email,
+                    "username" => $username,  // some thing to change with front
+                    "sex" => $sex,
+                    "email" => $email,
                 ),
             );
 //            $successResponse = json_encode($successArray);
@@ -155,13 +155,13 @@ class DB
                         "status" => false,
                         "message" => array
                         (
-                        "errorCode" => $errorCode,  // some thing to change with front
-                        "errorMessage" => "username was exists.",
+                            "errorCode" => $errorCode,  // some thing to change with front
+                            "errorMessage" => "username was exists.",
                         ),
                     );
 //                    $errorResponse = json_encode($errorArray);
 //                    return $errorResponse;
-                return $errorArray;
+                    return $errorArray;
                 }
                 default:
                     $errorArray = array
@@ -176,7 +176,7 @@ class DB
                     );
 //                    $errorResponse = json_encode($errorArray);
 //                    return $errorResponse;
-                return $errorArray;
+                    return $errorArray;
 
             }
 
