@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <title>chating for surprise</title>
+         <meta name="viewport" content="width=device-width,innitial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+                <!-- 新 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+            <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+            <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+        <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+            <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <style type="text/css">
+          .vertical-button{position: absolute;top: 93%;left: 69%;transform: translate(-93%, -69%);}
+          .text textarea{position: absolute;top: 87%;left: 11%; width: 53%;}
+        </style>
+        <script type="text/javascript">
+            function loadXMLDoc()
+            {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+              {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+              }
+            else
+              {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              }
+            xmlhttp.open("POST","send.php",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send(document.getElementById("myChat").value);
+            }
+        </script>
+    </head>
+    <body>
+      <div id="bg" style="position:absolute; width:100%; height:100%; z-index:-1">
+         <img src="src/chating.png" height="100%" width="100%"/>
+     </div>
+     <div id="1" style="position:absolute;width:100%;height:25%;z-index:-1">
+         <img src="src/header.png" width="100%" height="25%" />
+     </div>
+     <div id="logo2" style="position:absolute;top: 3%;left: 5%;transform: translate(-3%, -10%);z-index:-1">
+         <img src="src/logo2.png" width="10%" height="10%" />
+     </div>
+     <div class="container">
+        <form name="chat" method="post" action="chat.php?action=send" role="form">
+          <div class="text">
+            <textarea class="form-control" rows="3" cols="1"  style="resize:none;" placeholder="想说点什么?" name="message" id="myChat"></textarea>
+          </div>
+          <div class="vertical-button">
+            <p>
+              <button type="button" class="btn btn-info btn-lg" onclick="loadXMLDoc()">发送<br>Send</button>
+            </p>
+          </div>
+      </form>
+    </div>
+    </body>
+</html>
