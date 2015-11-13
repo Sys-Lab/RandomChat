@@ -12,6 +12,7 @@ require_once ('../include/User.php');
 ?>
 
 
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -54,32 +55,29 @@ require_once ('../include/User.php');
             </p>
         </div>
         <div class="vertical-button">
-    <?php
-        $user = new User();
-        if ($user->isLogin())
-        {
-            ?>
-            <p>
-                <button class="btn btn-info btn-lg" type="button" onclick="location='home.php'">home</button>
-            </p>
             <?php
-        }
-        else
-        {
+            $user = new User();
+            if ($user->isLogin())
+            {
+                ?>
+                <p>
+                    <button class="btn btn-info btn-lg" type="button" onclick="location='home.php'">home</button>
+                </p>
+                <?php
+            }
+            else
+            {
+                ?>
+                <p>
+                    <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#myRegister">register</button>
+                    <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target=".bs-example-modal-sm"> signin </button>
+                </p>
+                <?php
+            }
             ?>
-            <p>
-                <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#myRegister">register</button>
-                <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target=".bs-example-modal-sm"> signin </button>
-            </p>
-            <?php
-        }
-    ?>
-
-
         </div>
     </div>
 </div>
-
 <div id="mySignin" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -143,73 +141,12 @@ require_once ('../include/User.php');
             <div class="modal-footer"></div>
         </div>
     </div>
-    <div id="mySignin" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h1 class="text-center text-primary">登录</h1>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="login.php" class="form col-md-12 center-block">
-                        <div class="form-group">
-                            <label for="Username">  Username</label>
-                            <input type="username" class="form-control input-lg" name="username" placeholder="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="Username">  Password</label>
-                            <input type="password" class="form-control input-lg" name="password" placeholder="password" maxlength=16>
-                        </div>
-                        <div class="form-group" align="center">
-                            <button type="submit" class="btn btn-default btn-lg">Submit</button>
-                        </div>
-                    </form>
-                    <div class="modal-footer"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="myRegister" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h1 class="text-center text-primary">注册</h1>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="register.php" class="form col-md-12 center-block">
-                        <div class="form-group">
-                            <label for="Username">  Username</label>
-                            <input type="username" class="form-control input-lg" placeholder="username" name="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="Password">  Password</label>
-                            <input type="password" class="form-control input-lg" placeholder="password" name="password" maxlength=16>
-                        </div>
-                        <div class="form-group">
-                            <label class="radio-inline">
-                                <input type="radio" name="sex" value="male"> gentleman
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="sex" value="female"> lady
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="Email">  Email</label>
-                            <input type="email" class="form-control input-lg" placeholder="email" name="email">
-                        </div>
-                </div>
-                <div class="form-group" align="center">
-                    <button type="submit" class="btn btn-default btn-lg">Submit</button>
-                </div>
-                </form>
-                <div class="modal-footer"></div>
-            </div>
-        </div>
 </div>
 </div>
 </body>
 </html>
+
+
 
 
 <?php
