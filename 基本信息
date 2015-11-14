@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<!-- 引入 Bootstrap -->
+      <link href="bootstrap.min.css" rel="stylesheet">
+     <style>
+	 *{margin:0px; padding:0px;}
+.head{margin:0px auto; width:100%;}
+.left{width:30%; height:600px; background:#F2F2F2; float:left;}
+.right{width:70%; height:600px; background:#FFF; float:left;}
+.down{width:100%;}
+.p1{  font-weight:900;
+	line-height:200%;
+	font-size:30px;
+}
+.p2{position:absolute;top:25%;left:70%;text-align:right;}
+.weizhi{position:absolute;top:80%;left:63%}
+.weizhi2{position:absolute;top:80%;left:73%}
+.weizhi1{position:absolute;left:60%;top:95%}
+small{color:#CCC;}
+.absolute{position:absolute;top:30%;left:40%}
+     </style>
+     <title>个人信息</title>
+    </head>
+<body>
+<div class="head">
+<div class="left"><p class="p1" align="center" style="background-color:#06F">基本信息</p>
+<p class="p1" align="center">我的好友</p>
+<p class="p1" align="center">消息</p>
+</div>
+<div class="right">
+<img class="absolute img-circle" src="fd32a7c897ae044e3234c6c9d8498aed.jpg">
+<p class="p2" >用户名：<img src="遮挡.png"><br><br>
+个性签名：<small>我不服!</small>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br><br>
+性别：<img src="遮挡.png" ><br><br>
+居住地：<img src="遮挡.png" ><br><br>
+生日：<img src="遮挡.png" ><br><br>
+情感状况：<img src="遮挡.png" ><br><br></p>
+<button type="button" class="btn btn-info weizhi">+加好友<a href=""</button>
+<button type="button" class="btn btn-default weizhi2" onclick="javascript:window.location.href='********.html';">聊天</button>
+</div>
+</div>
+<div class="down"><button type="button" class="btn btn-info btn-lg weizhi1" style="width:250px;height:50px" onclick="javascript:window.location.href='*******.html';">Random Chat!</button>
+</div>
+
+</div></div>
+</body>
+
+</html>
