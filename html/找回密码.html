@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<!-- 引入 Bootstrap -->
+      <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+<title>找回密码</title>
+<style>
+      body {background-image:url("images/background.jpg");}
+	  .set{
+border:2px;
+padding:10px 40px; 
+background:#FFF;
+width:300px;
+position:absolute;top:200px;left:500px;border-radius:10px;border:2px;}
+.weizhi{position:absolute;top:330px;left:80px;}
+.weizhi1{position:absolute;top:330px;left:150px;}
+h2{color:#30a8d4;}
+#color{color:#b8babc;}
+     </style>
+</head>
+<body>
+<div style="position: absolute; top: 50px; left: 100px;">
+<img src="其他logo.png" width="129" height="100"></div>
+
+<div class="set">
+
+    <table width="200"  height="250"bgcolor="#FFFFFF" >
+    <h2 align="center">找回密码</h2>
+                     <tr align=center><td>用户名<br><div id="color">(选填)</div></td><td><input type="text" name="username"  id="username"></td></tr>
+                     <tr align=center><td>邮箱</td><td><input type="text" name="youxiang" ></td></tr>
+                     <tr align=center><td>验证码</td><td><input type="text" name="yanzheng"></td></tr>
+          <tr align=center><td colspan="2"><button type="button" class="btn btn-info">提交</button></td></tr>
+                     
+    </table>
+    <button type="button" class="btn btn-info weizhi">注册</button>
+	<button type="button" class="btn btn-default weizhi1">登录</button>
+</body>
+</html>

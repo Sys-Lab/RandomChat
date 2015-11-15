@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<!-- 引入 Bootstrap -->
+      <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+<title>密码修改成功</title>
+ <style>
+      body {background-image:url("images/background.jpg");}
+     </style>
+     <script>
+function r()
+{
+
+	var username=document.getElementById("username");
+	var pass=document.getElementById("password");
+	if(username.value=="")
+	{
+		alert("请输入用户名");
+		username.focus();
+		return;
+	}
+	if(pass.value=="")
+	{
+		alert("请输入密码");
+		return;
+	}
+return true;
+}
+</script>
+<style>
+.set{
+border:2px;
+padding:10px 40px; 
+background:#FFF;
+width:300px;
+position:absolute;top:150px;left:500px;border-radius:10px;border:2px;}
+.weizhi{position:absolute;top:380px;left:80px;}
+.weizhi1{position:absolute;top:380px;left:150px;}
+.color{background-color:#0F3; color:#FFF;}
+</style>
+</head>
+<body>
+<div style="position: absolute; top: 50px; left: 100px;">
+<img src="其他logo.png" width="129" height="100"></div>
+
+<div class="set">
+
+    <table width="200"  height="250"bgcolor="#FFFFFF" >
+    <h3 align=center class="color">密码修改成功</h3>
+                     <tr align=center><td>用户名</td><td><input type="text" name="username"  id="username"></td></tr>
+                     <tr align=center><td>密 码</td><td><input type="password" name="password" ></td></tr><br>
+                     <tr align=center ><td>验证码</td><td><input type="text" name="yanzheng"></td></tr>
+                     <tr align=center><td>记住我</td><td><input id=rm value=1 type=checkbox name=remember></td></tr>
+
+                     <tr align=center><td colspan="2"><button type="button" class="btn btn-info">提交</button></td></tr>
+                     
+    </table>
+
+ <a href="找回密码.html" target="_blank">忘记密码？</a>
+ <button type="button" class="btn btn-info weizhi" onclick="javascript:window.location.href='验证邮箱.html';">注册</button>
+	<button type="button" class="btn btn-default weizhi1" onclick="javascript:window.location.href='*******'.html';">登录</button>
+</div>
+</body>
+</html>
